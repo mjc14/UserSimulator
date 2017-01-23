@@ -99,6 +99,11 @@ if __name__ == "__main__":
     args = parser.parse_args()
     params = vars(args)
 
+
+# fixed some parameter for debug 
+    params['agt'] = 9 
+    params['usr'] = 1
+    
     print 'Dialog Parameters: '
     print json.dumps(params, indent=2)
 
