@@ -103,6 +103,7 @@ if __name__ == "__main__":
 # fixed some parameter for debug 
     params['agt'] = 9 
     params['usr'] = 1
+    params['run_mode'] = 2
     
     print 'Dialog Parameters: '
     print json.dumps(params, indent=2)
@@ -348,6 +349,7 @@ def run_episodes(count, status):
     
     for episode in xrange(count):
         print ("Episode: %s" % (episode))
+        print ' current experience_replay_pool size %d , max experience_replay_pool_size %d' %(len(agent.experience_replay_pool), agent.experience_replay_pool_size)        
         dialog_manager.initialize_episode()
         episode_over = False
         
@@ -363,11 +365,12 @@ def run_episodes(count, status):
                 
                 cumulative_turns += dialog_manager.state_tracker.turn_count
         
-        # simulation
+        # simulation (it is likely cross validation)
         if agt == 9 and params['trained_model_path'] == None:
             agent.predict_mode = True
+            print ' current experience_replay_pool size %d , max experience_replay_pool_size %d' %(len(agent.experience_replay_pool), agent.experience_replay_pool_size)        
             simulation_res = simulation_epoch(simulation_epoch_size)
-            
+            print ' current experience_replay_pool size %d , max experience_replay_pool_size %d' %(len(agent.experience_replay_pool), agent.experience_replay_pool_size)            
             performance_records['success_rate'][episode] = simulation_res['success_rate']
             performance_records['ave_turns'][episode] = simulation_res['ave_turns']
             performance_records['ave_reward'][episode] = simulation_res['ave_reward']

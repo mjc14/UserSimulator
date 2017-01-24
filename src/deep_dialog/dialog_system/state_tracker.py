@@ -108,7 +108,15 @@ class StateTracker:
         ########################################################################
         assert(not (user_action and agent_action))
         assert(user_action or agent_action)
+        
+        if user_action :
+            print 'Agent update state user_action is :'
+            print user_action
 
+        if agent_action :            
+            print 'Agent update state agent_action is :'
+            print agent_action
+                
         ########################################################################
         #   Update state to reflect a new action by the agent.
         ########################################################################

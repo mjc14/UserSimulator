@@ -81,8 +81,7 @@ class AgentDQN(Agent):
         
     
     def prepare_state_representation(self, state):
-        """ Create the representation for each state """
-        
+        """ Create the representation(feature) for each state """
         user_action = state['user_action']
         current_slots = state['current_slots']
         kb_results_dict = state['kb_results_dict']
@@ -138,6 +137,7 @@ class AgentDQN(Agent):
             for slot in agent_last['request_slots'].keys():
                 agent_request_slots_rep[0,self.slot_set[slot]] = 1.0
         
+        #TODO
         turn_rep = np.zeros((1,1)) + state['turn'] / 10.
 
         ########################################################################
@@ -183,8 +183,8 @@ class AgentDQN(Agent):
         
         if self.current_slot_id < len(self.request_set):
             slot = self.request_set[self.current_slot_id]
+            print 'The Rule Policy generate  request slot is : %s' %slot
             self.current_slot_id += 1
-
             act_slot_response = {}
             act_slot_response['diaact'] = "request"
             act_slot_response['inform_slots'] = {}
@@ -202,6 +202,9 @@ class AgentDQN(Agent):
         
         for (i, action) in enumerate(self.feasible_actions):
             if act_slot_response == action:
+                print 'The Rule Policy generate  index and system act:'
+                print 'index is %d' %i
+                print 'act_slot_response : %s' %act_slot_response                
                 return i
         print act_slot_response
         raise Exception("action index not found")

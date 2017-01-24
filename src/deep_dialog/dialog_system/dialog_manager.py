@@ -45,8 +45,12 @@ class DialogManager:
         #   CALL AGENT TO TAKE HER TURN
         ########################################################################
         self.state = self.state_tracker.get_state_for_agent()
+        print 'DM Current state is: '
+        print self.state
         self.agent_action = self.agent.state_to_action(self.state)
-        
+        print 'DM Current agent_action is: '
+        print self.agent_action
+                
         ########################################################################
         #   Register AGENT action with the state_tracker
         ########################################################################
@@ -59,6 +63,8 @@ class DialogManager:
         #   CALL USER TO TAKE HER TURN
         ########################################################################
         self.sys_action = self.state_tracker.dialog_history_dictionaries()[-1]
+        print 'DM Current sys_action is: '
+        print self.sys_action        
         self.user_action, self.episode_over, dialog_status = self.user.next(self.sys_action)
         self.reward = self.reward_function(dialog_status)
         
@@ -86,6 +92,7 @@ class DialogManager:
             reward = 2*self.user.max_turn #20
         else:
             reward = -1
+        print 'reward function based on the dialog_status, reward is %r' %reward
         return reward
     
     def reward_function_without_penalty(self, dialog_status):
@@ -96,6 +103,7 @@ class DialogManager:
             reward = 2*self.user.max_turn
         else:
             reward = 0
+        print 'reward function without penalty on per turn and failure dialog, reward is %r' %reward
         return reward
     
     

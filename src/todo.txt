@@ -1,0 +1,19 @@
+1. dqn 的输入维度是如何确定的？
+self.state_dimension = 2 * self.act_cardinality + 7 * self.slot_cardinality + 3 + self.max_turn
+
+因为特征定义如下：
+[
+    user_act_rep,
+    user_inform_slots_rep,
+    user_request_slots_rep,
+    agent_act_rep,
+    agent_inform_slots_rep,
+    agent_request_slots_rep,
+    current_slots_rep,
+    turn_rep,
+    turn_onehot_rep,
+    kb_binary_rep,
+    kb_count_rep
+]
+
+2. 特征表示的那部分是不是可以换成其他的网络结构: lstm ?  

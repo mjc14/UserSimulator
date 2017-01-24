@@ -196,7 +196,12 @@ class RuleSimulator(UserSimulator):
         response_action['nl'] = ""
         
         # add NL to dia_act
-        self.add_nl_to_action(response_action)                       
+        self.add_nl_to_action(response_action)
+        print 'User simulator generate info:'
+        print 'response_action : %s ' %response_action
+        print 'episode_over: %r' %self.episode_over
+        print 'dialog_status: %s ' %self.dialog_status
+        
         return response_action, self.episode_over, self.dialog_status
     
     

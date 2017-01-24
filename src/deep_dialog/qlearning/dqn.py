@@ -5,7 +5,7 @@ Created on Jun 18, 2016
 '''
 
 from .utils import *
-
+import numpy as np
 
 class DQN:
     
@@ -280,5 +280,5 @@ class DQN:
     def predict(self, Xs, params, **kwargs):
         Ys, caches = self.fwdPass(Xs, params, predict_model=True)
         pred_action = np.argmax(Ys)
-        
+        print 'DQN predict action index is : %s' %pred_action
         return pred_action
